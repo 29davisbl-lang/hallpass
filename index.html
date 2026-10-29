@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f4">
+    <title>ClearPass — Restroom Pass</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="ClearPass home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 3.5 27 8v7.2c0 6.4-4.6 11.1-11 13.3C9.6 26.3 5 21.6 5 15.2V8l11-4.5Z" fill="currentColor" opacity=".15"/>
+              <path d="m11.3 16.1 3.1 3.1 6.6-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-name">clearpass<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-right">
+          <span class="class-label"><span class="online-dot"></span> Room 204</span>
+          <span class="topbar-divider" aria-hidden="true"></span>
+          <span class="today-label" id="today-label"></span>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> RESTROOM PASS</p>
+            <h1>A little break,<br><span>made simple.</span></h1>
+            <p class="intro-copy">Request a pass, wait for your teacher's okay, and check back in when you're back.</p>
+          </div>
+          <div class="intro-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+            <div class="art-circle">
+              <svg viewBox="0 0 100 100" fill="none">
+                <path d="M50 12 80 24v20c0 19-12.6 33-30 41-17.4-8-30-22-30-41V24l30-12Z" fill="#fff"/>
+                <path d="m37 49 9 9 18-20" stroke="#477A64" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="art-sparkle sparkle-one">✳</span>
+            <span class="art-sparkle sparkle-two">✳</span>
+          </div>
+        </section>
+
+        <section class="workspace" aria-label="Restroom pass app">
+          <div class="mode-bar">
+            <div class="mode-switch" role="tablist" aria-label="Choose a view">
+              <button class="mode-tab active" id="student-tab" role="tab" aria-selected="true" aria-controls="student-panel" data-mode="student">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 10a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4ZM3.8 17.2c.3-3 2.8-5 6.2-5s5.9 2 6.2 5H3.8Z" fill="currentColor"/></svg>
+                Student
+              </button>
+              <button class="mode-tab" id="teacher-tab" role="tab" aria-selected="false" aria-controls="teacher-panel" data-mode="teacher">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.2h14v9.1H9l-4.2 3v-3H3V4.2Zm3 3h8m-8 3h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Teacher
+                <span class="pending-badge" id="pending-badge" hidden>0</span>
+              </button>
+            </div>
+            <span class="mode-hint" id="mode-hint">Your pass, all in one place</span>
+          </div>
+
+          <div class="panel student-panel" id="student-panel" role="tabpanel" aria-labelledby="student-tab">
+            <div class="student-main">
+              <div class="section-heading">
+                <div>
+                  <p class="card-kicker">STUDENT VIEW</p>
+                  <h2>Ready when you are.</h2>
+                </div>
+                <span class="step-chip"><span>01</span> Request · Wait · Return</span>
+              </div>
+
+              <div class="request-area">
+                <label class="field-label" for="student-name">Your name</label>
+                <div class="request-row">
+                  <input id="student-name" name="student-name" type="text" maxlength="48" placeholder="e.g. Jordan Lee" autocomplete="name">
+                  <button class="primary-button" id="request-button" type="button">
+                    Request a pass
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4.5-4.5L15 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+                <p class="field-note">Your teacher will review your request before you go.</p>
+              </div>
+
+              <div class="student-status" id="student-status" aria-live="polite"></div>
+            </div>
+            <aside class="student-aside">
+              <span class="aside-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5 20 7v5.3c0 4.6-3.3 7.9-8 9.5-4.7-1.6-8-4.9-8-9.5V7l8-3.5Z" stroke="currentColor" stroke-width="1.6"/><path d="m8.5 12.2 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <h3>One step at a time</h3>
+              <p>Wait for approval before leaving. When you're back, tap the check-in button so your teacher knows you're here.</p>
+              <div class="aside-rule"></div>
+              <div class="privacy-note"><span class="privacy-dot"></span> This class's pass list is shared on this device.</div>
+            </aside>
+          </div>
+
+          <div class="panel teacher-panel" id="teacher-panel" role="tabpanel" aria-labelledby="teacher-tab" hidden>
+            <div class="teacher-header">
+              <div>
+                <p class="card-kicker">TEACHER VIEW</p>
+                <h2>Classroom passes</h2>
+              </div>
+              <div class="teacher-stats">
+                <div class="stat"><span class="stat-number" id="waiting-count">0</span><span>Waiting</span></div>
+                <span class="stat-divider"></span>
+                <div class="stat"><span class="stat-number" id="out-count">0</span><span>Out now</span></div>
+              </div>
+            </div>
+            <div class="queue-section">
+              <div class="list-heading">
+                <h3>Needs your attention</h3>
+                <span class="list-caption" id="queue-caption">Requests appear here</span>
+              </div>
+              <div id="teacher-queue" class="request-list" aria-live="polite"></div>
+            </div>
+            <div class="history-section">
+              <div class="list-heading">
+                <h3>Recent activity</h3>
+                <span class="list-caption">Latest passes</span>
+              </div>
+              <div id="teacher-history" class="history-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <span>Made for a smoother classroom day</span>
+          <span class="footer-mark">clearpass<span class="brand-period">.</span></span>
+        </footer>
+      </main>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </body>
+</html>
